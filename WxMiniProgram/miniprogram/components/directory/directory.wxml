@@ -1,0 +1,22 @@
+<!--components/directory/directory.wxml-->
+<!--图书目录组件-->
+<view class="layout_vertical">
+	<view class="horizon_center layout_vertical">
+		<view style="height:5vh"></view>
+		<block>
+			<text id="book_name">{{bookname}}</text>
+		</block>
+			<view style="height:2vh"></view>
+		<block>
+			<text id="author">{{author}}</text>
+		</block>
+			<view style="height:5vh"></view>
+	</view>
+  <scroll-view scroll-y style="height:80vh">
+	<block wx:for="{{charpters}}" >
+		<view class="charpter" bindtap="jump_to_certain_charpter" data-index="{{index}}">{{"第"+(index+1)+"章 "+charpters[index]}}</view>
+		<view style="height:5vh"></view>
+		
+	</block>
+  </scroll-view>
+</view>

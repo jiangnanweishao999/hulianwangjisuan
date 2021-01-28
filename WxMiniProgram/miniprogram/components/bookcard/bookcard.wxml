@@ -1,0 +1,12 @@
+<!--components/bookcard/bookcard.wxml-->
+<i-card  title="{{n}}" class="card" thumb="{{p}}">
+<view slot="content" class="content">作者：{{a}}</view>   
+    <view slot="content" class="content">简介：{{d}}</view>
+    <view slot="footer" class="footer">
+        <i-icon type="add" size="20" color="#80848f" bindtap="addmethod"/>
+         <i-icon type="browse" size="20" color="#80848f" bindtap="detailmethod"/>
+    </view>
+   
+</i-card>
+
+ <van-notify id="van-notify" />

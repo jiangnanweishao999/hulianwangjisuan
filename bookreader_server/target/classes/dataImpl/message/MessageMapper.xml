@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookreader.data.message.MessageMapper">
+    <insert id="createNewMessage" parameterType="com.example.bookreader.po.message.Message" useGeneratedKeys="true" keyProperty="id">
+        insert into message(openId, action, bookId, chapter, page, date) value(#{openId},#{action},#{bookId},#{chapter},#{page},#{date})
+    </insert>
+    <delete id="deleteMessage">
+        delete from message where id=#{id}
+    </delete>
+    <delete id="deleteAllMessages">
+        delete from message where openId=#{openId}
+    </delete>
+    <select id="getAllMessages" resultMap="Message">
+        select * from message where openId=#{openId}
+    </select>
+    <select id="getAllUserMessages" resultMap="Message">
+        select * from message;
+    </select>
+    <resultMap id="Message" type="com.example.bookreader.po.message.Message">
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,72 @@
+<!--miniprogram/pages/book/index/index.wxml-->
+<view>
+	<i-sticky scrollTop="{{scrollTop}}" class="sticky">
+		<i-sticky-item i-class="i-sticky-demo-title">
+			<view slot="content">
+				<!--中间部分(可滚动)-->
+				<view>
+					<swiper indicator-dots="true" interval="2000" autoplay="true">
+						<swiper-item>
+							<image src="{{goodbooks[0].bookImgUrl}}" style="width:100%"></image>
+						</swiper-item>
+						<swiper-item>
+							<image src="{{goodbooks[1].bookImgUrl}}" style="width:100%"></image>
+						</swiper-item>
+						<swiper-item>
+							<image src="{{goodbooks[2].bookImgUrl}}" style="width:100%"></image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<van-tabs active="a">
+					<van-tab title="书城搜搜" name="a">
+				<view class="search">
+							
+							<i-icon class="float-right" bindtap="startSearch" type="search" size="20" color="#80848f" />
+						</view>
+<i-grid wx:for="{{index1}}" wx:for-index="rowindex">
+							<i-grid-item wx:for="{{index2}}" wx:for-index="colindex">
+								<book-card a="{{books[rowindex*2+colindex].bookAuthor}}"
+								n="{{books[rowindex*2+colindex].bookName}}" p="{{books[rowindex*2+colindex].bookImgUrl}}" d="{{util.sub(books[rowindex*2+colindex].bookDescription)}}" bookId="{{books[rowindex*2+colindex].id}}"  wx-if="{{rowindex*bookperline+colindex<booksnum}}"></book-card>
+							</i-grid-item>
+
+						</i-grid>
+						
+					</van-tab>
+					<van-tab title="每日推荐" name="b">
+						<scroll-view scroll-y>
+						<view style="height:5vh"></view>
+							<van-card wx:for="{{goodbooks}}" wx:for-index="recoindex" tag="每日推荐" desc="{{goodbooks[recoindex].bookDescription}}" title='{{goodbooks[recoindex].bookName}}' thumb="{{goodbooks[recoindex].bookImgUrl}}" >
+							
+								<view slot="footer">
+									<van-tag plain size="medium" color="green" bindtap="detailmethod" data-index='{{recoindex}}'>查看详情</van-tag>
+									<van-tag plain size="medium" color="#f2826a" bindtap="addmethod" data-index='{{recoindex}}'>收藏</van-tag>
+								</view>
+							</van-card>
+							<view style="height:20vh"></view>
+						</scroll-view>
+					</van-tab>
+
+
+				</van-tabs>
+			</view>
+			
+		</i-sticky-item>
+	</i-sticky>
+ <van-notify id="van-notify" />
+
+</view>
+<!--底部标签栏-->
+<i-tab-bar current="{{ current }}" fixed="true" color="#f759ab" bindchange="handleChange">
+	<i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
+	<i-tab-bar-item key="shelf" icon="group"  current-icon="group_fill" title="书架"></i-tab-bar-item>
+	<i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
+</i-tab-bar>
+<wxs module="util">
+    var sub = function(val) {
+			if(val.length>30)
+        return val.substring(0, 30)+"..."
+			else
+				return val
+    }
+    module.exports.sub = sub;
+</wxs>

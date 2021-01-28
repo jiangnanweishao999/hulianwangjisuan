@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookreader.data.Audio.AudioMapper">
+    <insert id="addAudio" parameterType="com.example.bookreader.po.Audio.Audio" useGeneratedKeys="true" keyProperty="id">
+        insert into audio(audioNo,audioName,radioUrl,bookId,audioDescription)
+        values(#{audioNo},#{audioName},#{radioUrl},#{bookId},#{audioDescription})
+    </insert>
+    <select id="allAudio" resultMap="Audio">
+        select * from audio
+    </select>
+    
+    <resultMap id="Audio" type="com.example.bookreader.po.Audio.Audio">
+        <id column="id" property="id"></id>
+        <result column="audioNo" property="audioNo"></result>
+        <result column="audioName" property="audioName"></result>
+        <result column="radioUrl" property="radioUrl"></result>
+        <result column="bookId" property="bookId"></result>
+        <result column="audioDescription" property="audioDescription"></result>
+    </resultMap>
+</mapper>

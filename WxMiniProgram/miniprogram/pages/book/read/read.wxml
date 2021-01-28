@@ -1,0 +1,62 @@
+<!--pages/book/read/read.wxml-->
+<modal hidden="{{! showSettings }}" bindconfirm="handleSettingOk" bindcancel="handleSettingCancel">
+	<view>
+		<view class="setting-item">
+			<view class="setting-item-text">字体颜色</view>
+			<slider class="slider" max="10000000" value="{{currentFontColorValue}}" min="0" step="50" selected-color="blue" backgroundColor="yellow" bindchange="bindchange">
+			</slider>
+			<view class="color-sample" style="background-color:{{currentFontColor}}"></view>
+		</view>
+		<view class="setting-item">
+			<view class="setting-item-text">书本颜色</view>
+			<slider class="slider" max="10000000" value="{{currentBookColorValue}}" min="0" step="50" selected-color="blue" backgroundColor="yellow" bindchange="bindchange2">
+			</slider>
+			<view class="color-sample" style="background-color:{{currentBookColor}}"></view>
+		</view>
+		<view class="setting-item">
+			<view class="setting-item-text">护眼模式</view>
+			<switch value="{{switch}}" bind:change="onSwitchChange" slot="footer">
+			</switch>
+		</view>
+	</view>
+</modal>
+
+<van-popup closeable
+  close-icon-position="top-right"
+  position="left" show="{{showDirectory}}" bind:close="toggleLeft" hidden="{{showSettings}}" customStyle="width:80%;z-index=100">
+		<book-dir  bind:changeCharpter="changeCharpter" bookname="{{bookName}}" charpters="{{directories}}" author="{{author}}" class="directory"></book-dir>
+</van-popup>
+
+
+
+<view class="perspective" hidden="{{ showSettings }}">
+	<view class="book-wrap">
+		<view 
+		wx:for="{{pages}}" 
+		animation="{{pages.length-index-1==anindex?ani:''}}" 
+		bindtransitionend='animationEnd' 
+		class="page" 
+		style="border-color:{{bookColor}};background:-webkit-radial-gradient(white, white, white, {{bookColor}});{{pages.length-index-1>=pagenum?'':'transform:rotateY(-180deg)'}}" 
+		bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
+			<view class="page-content" style="color:{{pageFontColor}}">
+			<text>{{pages[pages.length-index-1].content}}</text></view>
+		</view>
+	</view>
+	<view class="bottom-page" style="border-color:{{bookColor}};border-left-color:{{bookColor}};border-bottom-color:{{bookColor}}"></view>
+</view>
+<view class="function-bar" hidden="{{ showSettings }}">
+	<view class="layout_horizon">
+		<view class="modal_inner" bindtap="toggleLeft">
+			<image src="./img/dir_icon.jpg" style="width:70rpx"></image>
+			目录
+		</view>
+		<view class="modal_inner" bindtap="jumpToListen">
+			<image src="./img/listen_icon.gif"  style="width:80rpx"></image>
+			听书
+		</view>
+		<view class="modal_inner"  bindtap="openSettings">
+			<image src="./img/set_icon.jpg" style="width:70rpx"></image>
+			设置
+		</view>
+	</view>
+</view>

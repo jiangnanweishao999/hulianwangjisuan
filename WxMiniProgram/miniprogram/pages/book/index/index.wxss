@@ -1,0 +1,12 @@
+/* miniprogram/pages/book/index/index.wxss */
+.float-right{
+  position: absolute;
+  right: 20px;
+}
+
+.search{
+  margin-left: 5vh;
+  margin-top: 2vh;
+  padding-bottom: 4vh;
+  
+}

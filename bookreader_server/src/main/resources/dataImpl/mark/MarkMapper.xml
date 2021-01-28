@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookreader.data.mark.MarkMapper">
+    <insert id="addMark" parameterType="com.example.bookreader.po.mark.Mark" useGeneratedKeys="true" keyProperty="id">
+        insert into mark(bookId, openId, chapterId, offset) value(bookId,openId,chapterId,offset)
+    </insert>
+    <select id="getAllMarksByBookId" resultType="com.example.bookreader.po.mark.Mark">
+        select * from mark where bookId=#{bookId} and openId=#{openId}
+    </select>
+    <select id="getAllMarksByOpenId" resultType="com.example.bookreader.po.mark.Mark">
+        select * from mark where openId=#{openId}
+    </select>
+    <select id="getMark" resultType="com.example.bookreader.po.mark.Mark">
+        select * from mark where id=#{id}
+    </select>
+    <delete id="deleteMark">
+        delete from mark where id=#{id}
+    </delete>
+</mapper>

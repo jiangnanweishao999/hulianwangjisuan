@@ -1,0 +1,36 @@
+<!--miniprogram/pages/book/search/search.wxml-->
+<van-search value="{{ searchValue }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel" />
+<view style="height:3vh"></view>
+<view>
+	<i-sticky scrollTop="{{scrollTop}}" class="sticky">
+		<i-sticky-item i-class="i-sticky-demo-title">
+			<view slot="content">
+				<!--中间部分(可滚动)-->
+
+				<van-tabs active="a">
+					<van-tab  name="a">
+						
+<view wx-if="{{haveresult}}" ><text>没有找到你想要的结果</text></view>
+<i-grid wx:for="{{index1}}" wx:for-index="rowindex">
+							<i-grid-item wx:for="{{index2}}" wx:for-index="colindex">
+								<book-card a="{{books[rowindex*2+colindex].bookAuthor}}"
+								n="{{books[rowindex*2+colindex].bookName}}" p="{{books[rowindex*2+colindex].bookImgUrl}}" d="{{util.sub(books[rowindex*2+colindex].bookDescription)}}" bookId="{{books[rowindex*2+colindex].id}}" wx-if="{{rowindex*2+colindex<booksnum}}"></book-card>
+							</i-grid-item>
+
+						</i-grid>
+						
+					</van-tab>
+				</van-tabs>
+			</view>
+		</i-sticky-item>
+	</i-sticky>
+</view>
+<wxs module="util">
+    var sub = function(val) {
+			if(val.length>30)
+        return val.substring(0, 30)+"..."
+			else
+				return val
+    }
+    module.exports.sub = sub;
+</wxs>

@@ -1,0 +1,18 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookreader.data.note.NoteMapper">
+    <insert id="addNote" parameterType="com.example.bookreader.po.note.Note" keyProperty="id" useGeneratedKeys="true">
+        insert into note(openId, noteContent, createDate,title) values(#{openId},#{noteContent},#{createDate},#{title})
+    </insert>
+    <select id="getAllNotes" resultMap="Note">
+        select * from note where openId=#{openId}
+    </select>
+    <delete id="deleteNote">
+        delete from note where id=#{id}
+    </delete>
+    <update id="updateNote">
+        update note set noteContent=#{noteContent},createDate=#{createDate} where id=#{id}
+    </update>
+    <resultMap id="Note" type="com.example.bookreader.po.note.Note">
+    </resultMap>
+
+</mapper>

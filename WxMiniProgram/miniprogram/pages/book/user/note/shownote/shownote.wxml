@@ -1,0 +1,51 @@
+<!--miniprogram/pages/book/user/note/shownote/shownote.wxml-->
+<scroll-view scroll-y>
+	<view class="shownote" wx-if="{{!showExample}}">
+
+		<view class="time-axe">
+			<view class="time-axe-circle"></view>
+			<view wx:for="{{noteList}}">
+			<view class="time-axe-node">
+				<view class="time-axe-line"></view>
+				<view class="time-axe-circle"></view>
+			
+			</view>
+				</view>
+			
+		</view>
+		
+		<view class="note-records">
+		<view wx:for="{{noteList}}" data-index='{{index}}' >
+			<view class="note-record">
+				<text>{{item.createDate}}</text>
+				<text>{{item.title}}</text>
+				<view>
+				<i-icon bindtap="showExample" wx-if='{{showDisable}}' data-index='{{index}}'  type="document_fill" size="28" color="blue" />
+					<button bindtap="delete" wx-if='{{showDisable}}' data-index='{{index}}' size="mini"  >删除</button>
+					</view>
+			</view>
+		
+			</view>
+
+
+		</view>
+	</view>
+</scroll-view>
+<view class="note-example"  wx-if="{{showExample}}">
+	<view id="title">{{title}}</view>
+	<view id="date">{{createDate}}</view>
+	<scroll-view scroll-y>
+		<view id="content">
+			<textarea disabled="{{!updateDisable}}" value="{{text}}" maxlength="2000" bindinput="bindInput">
+    	</textarea>
+			</view>
+	</scroll-view>
+
+<view id="edit">
+ <button bindtap="update" style="color:{{updateDisable?'grey':'black'}}" >修改</button>
+ <button bindtap="save"  style="color:{{saveDisable?'grey':'black'}}" >保存</button>
+ <button bindtap="cancel" style="color:{{cancelDisable?'grey':'black'}}" >取消</button>
+ <button bindtap="back" >返回</button>
+</view>
+
+</view>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookreader.data.book.ShelfMapper">
+    <insert id="addShelf" parameterType="com.example.bookreader.po.book.Shelf" useGeneratedKeys="true" keyProperty="id">
+        insert into shelf(openId, bookId) value(#{openId},#{bookId})
+    </insert>
+    <delete id="deleteShelf">
+        delete from shelf where bookId=#{id}
+    </delete>
+    <select id="getAllShelf" resultType="com.example.bookreader.po.book.Shelf">
+        select * from shelf where openId=#{openId};
+    </select>
+
+</mapper>
